@@ -1,9 +1,19 @@
 package spring22.bookstore.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Book {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 	private String title, author;
-	private int year, isbn;
+	private int bookyear;
+	private String isbn;
 	private double price;
 	
 	public Book() {
@@ -11,11 +21,16 @@ public class Book {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Book(String title, String author, int year, int isbn, double price) {
+	public Book(String title) {
+		super();
+		this.title = title;
+	}
+
+	public Book(String title, String author, int bookyear, String isbn, double price) {
 		super();
 		this.title = title;
 		this.author = author;
-		this.year = year;
+		this.bookyear = bookyear;
 		this.isbn = isbn;
 		this.price = price;
 	}
@@ -37,18 +52,18 @@ public class Book {
 	}
 
 	public int getYear() {
-		return year;
+		return bookyear;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public void setBookyear(int bookyear) {
+		this.bookyear = bookyear;
 	}
 
-	public int getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setIsbn(int isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 
@@ -62,7 +77,7 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn + ", price=" + price
+		return "Book [title=" + title + ", author=" + author + ", bookyear=" + bookyear + ", isbn=" + isbn + ", price=" + price
 				+ "]";
 	}
 	
