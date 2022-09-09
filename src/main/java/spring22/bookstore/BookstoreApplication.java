@@ -24,9 +24,9 @@ public class BookstoreApplication {
 		return (args) -> {
 			log.info("save books");
 			
-			repository.save(new Book("kirjan nimi", "kirjailija", 1999, "1234-23-5439", 12.34));
-			repository.save(new Book("keittokirja", "kinuskikissa", 2012, "3212-44-2353", 23.56));
-			repository.save(new Book("kissakirja", "Maija Mirri", 2020, "1234-56-7896", 25.99));
+			repository.save(new Book("Viisikko", "Enid Blyton", 1986, "951-30-6520-0", 12.34));
+			repository.save(new Book("Keittokirja", "Kinuski Kissa", 2012, "321-44-2342-1", 23.56));
+			repository.save(new Book("Kissakirja", "Maija Mirri", 2020, "123-56-7896-2", 25.99));
 			
 			log.info("fetch all books");
 			for (Book book : repository.findAll()) {

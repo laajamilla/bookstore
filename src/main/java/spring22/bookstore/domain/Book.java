@@ -51,7 +51,7 @@ public class Book {
 		this.author = author;
 	}
 
-	public int getYear() {
+	public int getBookyear() {
 		return bookyear;
 	}
 

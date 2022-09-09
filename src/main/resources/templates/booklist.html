@@ -8,13 +8,23 @@
 <body>
 	<table>
 		<tr>
-			<th>Otsikko1</th>
-			<th>Otsikko2</th>
+			<th>Author</th>
+			<th>Title</th>
+			<th>Year</th>
+			<th>ISBN</th>
+			<th>Price</th>
+		</tr >
+			
+		<tr th:each = "book : ${books}">
+			<td th:text = "${book.author}"></td>
+			<td th:text = "${book.title}"></td>
+			<td th:text = "${book.bookyear}"></td>
+			<td th:text = "${book.isbn}"></td>
+			<td th:text = "${book.price}"></td>
 		</tr>
-		<tr>
-		
-		</tr>
-	
 	</table>
+	<a href = "/add">Add book</a>
+	
+	
 </body>
 </html>
