@@ -74,6 +74,11 @@ public class Book {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+
+	public Long getId() {
+		return id;
+	}
 
 	@Override
 	public String toString() {
