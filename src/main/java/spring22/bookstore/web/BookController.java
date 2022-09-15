@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import spring22.bookstore.BookstoreApplication;
 import spring22.bookstore.domain.Book;
 import spring22.bookstore.domain.BookRepository;
+import spring22.bookstore.domain.CategoryRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,9 @@ public class BookController {
 	
 	@Autowired
 	private BookRepository repository;
+	
+	@Autowired
+	private CategoryRepository categoryrepository;
 
 	@RequestMapping(value= {"/", "booklist"})
 	public String bookList(Model model) {
@@ -33,6 +37,7 @@ public class BookController {
 	@RequestMapping(value= "/add")
 	public String addBook(Model model) {
 		model.addAttribute("book", new Book());
+		model.addAttribute("categories", categoryrepository.findAll());
 		return "addbook";
 	}
 	
@@ -48,5 +53,13 @@ public class BookController {
 		log.info("id");
 		repository.deleteById(bookId);
 		return "redirect:../booklist";
+	}
+	
+	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
+	
+	public String editBook(@PathVariable("id") Long bookId, Model model) {
+		model.addAttribute("book", repository.findById(bookId));
+		model.addAttribute("categories", categoryrepository.findAll());
+		return "editbook";
 	}
 }

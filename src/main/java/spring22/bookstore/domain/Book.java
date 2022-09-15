@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -16,6 +18,10 @@ public class Book {
 	private String isbn;
 	private double price;
 	
+	@ManyToOne
+	@JoinColumn(name="categoryid")
+	private Category category;
+	
 	public Book() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -25,7 +31,9 @@ public class Book {
 		super();
 		this.title = title;
 	}
-
+	
+	// tässä konstruktorissa ei kategoriaa, tarvitaan, jos kateg ei vielä käytetty muualla ohjelmassa
+	// tällä konstruktorilla kategorian arvo = null tietokannassa
 	public Book(String title, String author, int bookyear, String isbn, double price) {
 		super();
 		this.title = title;
@@ -33,7 +41,19 @@ public class Book {
 		this.bookyear = bookyear;
 		this.isbn = isbn;
 		this.price = price;
+		
 	}
+	// tässä konstruktorissa kategoria
+	public Book(String title, String author, int bookyear, String isbn, double price, Category category) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.bookyear = bookyear;
+		this.isbn = isbn;
+		this.price = price;
+		this.category = category;
+	}
+
 
 	public String getTitle() {
 		return title;
@@ -78,6 +98,19 @@ public class Book {
 
 	public Long getId() {
 		return id;
+	}
+	
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override
