@@ -36,10 +36,16 @@ public class BookstoreApplication {
 			repository.save(new Book("Kissakirja", "Maija Mirri", 2020, "123-56-7896-2", 25.99, categoryrepository.findByName("Eläimet").get(0)));
 			
 			
+			log.info("fetch all categories");
+			for (Category category : categoryrepository.findAll()) {
+				log.info(category.toString());
+			}
+			
 			log.info("fetch all books");
 			for (Book book : repository.findAll()) {
 				log.info(book.toString());
 			}
+			
 			
 		};
 	}
