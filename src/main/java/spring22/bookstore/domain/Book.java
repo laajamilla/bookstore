@@ -1,11 +1,13 @@
 package spring22.bookstore.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Book {
@@ -13,12 +15,15 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
+	//@Size(min=1, max=30)
 	private String title, author;
+	
 	private int bookyear;
 	private String isbn;
 	private double price;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="categoryid")
 	private Category category;
 	
