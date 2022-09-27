@@ -3,6 +3,7 @@ package spring22.bookstore.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +12,8 @@ import spring22.bookstore.BookstoreApplication;
 import spring22.bookstore.domain.Book;
 import spring22.bookstore.domain.BookRepository;
 import spring22.bookstore.domain.CategoryRepository;
+
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +45,15 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(Book book) {
+	public String save(@Valid Book book, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			System.out.println("some error happened");
+			//kategoriat vietävä uudelleen, koska ei kuljeta add- endpointin kautta
+			//muutoin kategorioita ei ole listattuna
+			model.addAttribute("categories", categoryrepository.findAll());
+			return "addbook";
+		}
+		
 		repository.save(book);
 		return "redirect:booklist";
 	}
