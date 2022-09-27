@@ -1,6 +1,7 @@
 package spring22.bookstore.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,6 +38,7 @@ public class BookController {
 		return "booklist";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value= "/add")
 	public String addBook(Model model) {
 		model.addAttribute("book", new Book());
@@ -65,7 +67,7 @@ public class BookController {
 		repository.deleteById(bookId);
 		return "redirect:../booklist";
 	}
-	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
 	
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
